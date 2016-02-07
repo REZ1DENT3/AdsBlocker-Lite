@@ -9,7 +9,7 @@ function sbversion()
     $build = file_get_contents('build');
     $build++;
     file_put_contents('build', $build);
-    $sb = round($build / ($build * 0.441), 3);
+    $sb = round(0.000441 * $build, 3);
     $manifest = file_get_contents('source/manifest.json');
     $manifest = (array)json_decode($manifest);
     $manifest['version'] = "$sb";
