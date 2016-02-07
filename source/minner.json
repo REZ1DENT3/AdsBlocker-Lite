@@ -1,0 +1,14 @@
+{
+  "background": [
+    "js-extended.js",
+    "parameters.js",
+    "storage-get.js"
+  ],
+  "blocker": [
+    "js-extended.js",
+    "parameters.js",
+    "jq-extended.js",
+    "storage-get.js",
+    "AdsBlocker.js"
+  ]
+}
