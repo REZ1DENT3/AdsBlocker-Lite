@@ -21,7 +21,7 @@ function sbversion()
 
 try {
 
-    $minnerJson = file_get_contents('source/minner.json');
+    $minnerJson = file_get_contents('minner.json');
     $minnerJson = json_decode($minnerJson);
 
     $caches = [];
