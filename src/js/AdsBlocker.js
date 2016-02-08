@@ -6,7 +6,7 @@ var t1 = (new Date()).getTime() - timerEps;
 var hostname = location.href.getHostname();
 
 var rules = new Array();
-var rulesRegExp = new Array();
+var rulesFunc = new Array();
 
 var isNotWhitelist = true;
 

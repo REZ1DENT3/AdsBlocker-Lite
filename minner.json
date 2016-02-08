@@ -1,6 +1,6 @@
 {
   "options": [
-    "jquery.min.js",
+    "jquery.js",
     "js-extended.js",
     "AdsBlocker.js",
     "options.js"
@@ -13,7 +13,7 @@
     "background.js"
   ],
   "blocker": [
-    "jquery.min.js",
+    "jquery.js",
     "js-extended.js",
     "AdsBlocker.js",
     "jq-extended.js",

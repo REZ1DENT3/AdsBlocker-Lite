@@ -19,11 +19,14 @@ chrome.storage.local.get({
     }
 
     jQuery.each(_rules, function (_key) {
-        if (_rules[_key].regExp) {
-            // rulesRegExp = [];
+        if (_rules[_key].indexOf('|>>|') >= 0) {
+            rulesFunc.push({
+                rule: _rules[_key].substr(0, _rules[_key].indexOf('|>>|')),
+                exec: _rules[_key].substr(_rules[_key].indexOf('|>>|') + 4)
+            });
         }
         else {
-            rules.push(_rules[_key].rule);
+            rules.push(_rules[_key]);
         }
     });
 

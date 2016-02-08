@@ -33,6 +33,14 @@ jQuery.prototype.blocker = function (callback) {
             blockerRulesCount += $rules.length;
             $rules.adsBlock();
 
+            $.each(rulesFunc, function (ind, rf) {
+                $rule = $(rulesFunc[ind].rule);
+                if ($rule.length) {
+                    blockerCount += $rule.length;
+                    eval('$rule.' + rulesFunc[ind].exec + '.adsBlock()');
+                }
+            });
+
             if (blockerRulesCount) {
                 chrome.runtime.sendMessage({
                     name: "setBadgeText",

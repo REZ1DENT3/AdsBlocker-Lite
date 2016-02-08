@@ -82,10 +82,7 @@ function setConfig(dataRules, apiKey, whitelisted) {
             rulesData[_hostname] = new Array();
         }
 
-        rulesData[_hostname].push({
-            'rule': rule,
-            'regExp': regExp
-        });
+        rulesData[_hostname].push(rule);
 
     });
 
