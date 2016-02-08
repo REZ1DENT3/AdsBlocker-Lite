@@ -4,12 +4,27 @@ include_once "vendor/autoload.php";
 
 use MatthiasMullie\Minify;
 
-function sbversion()
+function build()
 {
-    $build = file_get_contents('build');
+    return (int)trim(file_get_contents('build'));
+}
+
+function version()
+{
+    return round(0.000441 * build(), 3);
+}
+
+function nextBuild()
+{
+    $build = build();
     $build++;
     file_put_contents('build', $build);
-    $sb = round(0.000441 * $build, 3);
+}
+
+function sbversion()
+{
+    nextBuild();
+    $sb = version();
     $manifest = file_get_contents('source/manifest.json');
     $manifest = (array)json_decode($manifest);
     $manifest['version'] = "$sb";
@@ -17,6 +32,11 @@ function sbversion()
     $manifest = str_replace("\\/", "/", $manifest);
     file_put_contents('source/manifest.json', $manifest);
     return $sb;
+}
+
+if (isset($argv[1]) && $argv[1] == '-v') {
+    echo version(), " [", build(), "]", PHP_EOL;
+    die;
 }
 
 try {
@@ -31,24 +51,29 @@ try {
         $results = [];
         $fileName = 'source/js/' . $fileName . '.min.js';
 
-        foreach ($data as $file) {
-            $path = 'source/src/' . $file;
-            if (!isset($caches[$path])) {
-                $minifier = new Minify\JS();
-                $minifier->add(file_get_contents(__DIR__ . '/' . $path));
-                $caches[$path] = $minifier->minify();
-            }
-            $results[$file] = $caches[$path];
-        }
         $minifier = new Minify\JS();
-        $minifier->add(str_replace(PHP_EOL, "", implode(';', $results)));
-        $data = file_get_contents('header.js') . $minifier->minify();
-        $data = str_replace(";;", ";", $data);
+        foreach ($data as $file) {
+            $path = 'src/js/' . $file;
+            $minifier->add($path);
+            $results[] = $file;
+        }
+
+        $data = file_get_contents('src/js/header.js') . $minifier->minify();
+
         $data = str_replace("{version}", $sbversion, $data);
-        $data = str_replace("{year}", 2013 == date('Y') ? date('Y') : '2013 - ' . date('Y'), $data);
+        $data = str_replace("{year}", '2013 - ' . date('Y'), $data);
+
         file_put_contents($fileName, $data);
-        var_dump([$fileName => array_keys($results)]);
+        var_dump([$fileName => array_values($results)]);
     }
+
+    $cssFiles = scandir('src/css');
+    unset($cssFiles[0], $cssFiles[1]);
+    $minifier = new Minify\CSS();
+    foreach ($cssFiles as $file) {
+        $minifier->add('src/css/' . $file);
+    }
+    $minifier->minify('source/css/css.css');
 }
 catch (\Exception $e) {
     var_dump($e);

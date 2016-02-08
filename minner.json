@@ -1,4 +1,10 @@
 {
+  "options": [
+    "jquery.min.js",
+    "js-extended.js",
+    "AdsBlocker.js",
+    "options.js"
+  ],
   "html5": [
     "html5shiv.min.js",
     "respond.min.js"

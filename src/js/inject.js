@@ -356,6 +356,7 @@ function inject() {
             fullScreenOpenTime = NaN;
         }
     }
+
     /////////////////////////////////////////////////////////////////////////////////
 
     function isDocumentInFullScreenMode() {

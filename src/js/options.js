@@ -33,7 +33,7 @@ $('#ads-rules-online').click(function () {
         type: "POST",
         url: "https://ads.babichev.net/blocker",
         data: "token=" + $('#api-key').val().trim() + '&values=' + $('#ads-rules').val(),
-        success: function(msg){
+        success: function (msg) {
             console.log(msg);
         }
     });
@@ -43,7 +43,7 @@ $('#ads-rules-get-online').click(function () {
     $.ajax({
         type: "GET",
         url: "https://ads.babichev.net/blocker",
-        success: function(msg){
+        success: function (msg) {
             $('#ads-rules').val(msg);
         }
     });
