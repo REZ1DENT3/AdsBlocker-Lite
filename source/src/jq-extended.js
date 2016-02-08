@@ -28,7 +28,15 @@ jQuery.prototype.blocker = function (callback) {
 
     if (rules.length) {
         $rules = $(rules.join(', '));
+        blockerRulesCount += $rules.length;
         $rules.adsBlock();
+
+        if (blockerRulesCount) {
+            chrome.runtime.sendMessage({
+                name: "setBadgeText",
+                text: '' + blockerRulesCount
+            });
+        }
 
         if (typeof $rules.bund == "function") {
             $rules.bind("DOMSubtreeModified", function () {

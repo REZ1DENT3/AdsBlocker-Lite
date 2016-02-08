@@ -1,6 +1,6 @@
 {
     "name": "AdsBlocker Lite",
-    "version": "0.111",
+    "version": "0.112",
     "description": "AdsBlocker",
     "manifest_version": 2,
     "content_scripts": [

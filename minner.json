@@ -4,10 +4,7 @@
     "respond.min.js"
   ],
   "background": [
-    "jquery.min.js",
-    "js-extended.js",
-    "AdsBlocker.js",
-    "storage-get.js"
+    "background.js"
   ],
   "blocker": [
     "jquery.min.js",

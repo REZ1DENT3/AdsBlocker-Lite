@@ -1,4 +1,5 @@
 var blockerCount = 0;
+var blockerRulesCount = 0;
 var timerEps = 5;
 var t1 = (new Date()).getTime() - timerEps;
 

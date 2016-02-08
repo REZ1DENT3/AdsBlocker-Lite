@@ -1,4 +1,7 @@
-function reloadRules(items) {
+chrome.storage.sync.get({
+    rulesData: [],
+    whitelisted: []
+}, function (items) {
 
     rules = [];
     _rules = [];
@@ -33,33 +36,6 @@ function reloadRules(items) {
                 jQuery(document).bind("DOMSubtreeModified", function () {
                     jQuery(document).blocker();
                 });
-            });
-        });
-    }
-
-}
-
-chrome.storage.sync.get({
-    rulesData: [],
-    whitelisted: []
-}, function (items) {
-
-    reloadRules(items);
-
-    if (typeof chrome.tabs != 'undefined') {
-        chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-
-            hostname = tab.url.getHostname();
-            reloadRules(items);
-
-            var text = '';
-            if (isNotWhitelist) {
-                text += rules.length;
-            }
-
-            chrome.browserAction.setBadgeText({
-                text: text,
-                tabId: tabId
             });
         });
     }
