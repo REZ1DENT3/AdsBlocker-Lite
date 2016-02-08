@@ -1,6 +1,6 @@
 {
     "name": "AdsBlocker Lite",
-    "version": "0.112",
+    "version": "0.119",
     "description": "AdsBlocker",
     "manifest_version": 2,
     "content_scripts": [
@@ -12,13 +12,11 @@
             "js": [
                 "js/blocker.min.js"
             ],
-            "run_at": "document_start",
             "all_frames": true
         }
     ],
     "options_page": "options/options.html",
     "permissions": [
-        "storage",
         "activeTab",
         "notifications",
         "webRequest",
@@ -26,6 +24,7 @@
         "tabs",
         "webNavigation",
         "contextMenus",
+        "storage",
         "unlimitedStorage",
         "browsingData",
         "<all_urls>"

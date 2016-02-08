@@ -1,4 +1,4 @@
-chrome.storage.sync.get({
+chrome.storage.local.get({
     rulesData: [],
     whitelisted: []
 }, function (items) {
@@ -29,15 +29,13 @@ chrome.storage.sync.get({
 
     isNotWhitelist = items.whitelisted.indexOf(hostname) < 0;
 
-    if (typeof chrome.browserAction == 'undefined') {
-        jQuery(document).blocker(function () {
-            jQuery(document).ready(function () {
-                t1 = 0;
-                jQuery(document).bind("DOMSubtreeModified", function () {
-                    jQuery(document).blocker();
-                });
-            });
+    t1 = 0;
+    jQuery(document).blocker();
+    jQuery(document).ready(function () {
+        t1 = 0;
+        jQuery(document).bind("DOMSubtreeModified", function () {
+            jQuery(document).blocker();
         });
-    }
+    });
 
 });

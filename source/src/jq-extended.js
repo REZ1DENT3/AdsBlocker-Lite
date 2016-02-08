@@ -28,25 +28,25 @@ jQuery.prototype.blocker = function (callback) {
 
     if (rules.length) {
         $rules = $(rules.join(', '));
-        blockerRulesCount += $rules.length;
-        $rules.adsBlock();
+        if ($rules.length) {
 
-        if (blockerRulesCount) {
-            chrome.runtime.sendMessage({
-                name: "setBadgeText",
-                text: '' + blockerRulesCount
-            });
+            blockerRulesCount += $rules.length;
+            $rules.adsBlock();
+
+            if (blockerRulesCount) {
+                chrome.runtime.sendMessage({
+                    name: "setBadgeText",
+                    text: '' + blockerRulesCount
+                });
+            }
+
+            if (typeof $rules.bund == "function") {
+                $rules.bind("DOMSubtreeModified", function () {
+                    $(this).adsBlock();
+                });
+            }
+
         }
-
-        if (typeof $rules.bund == "function") {
-            $rules.bind("DOMSubtreeModified", function () {
-                $(this).adsBlock();
-            });
-        }
-    }
-
-    if (typeof callback == "function") {
-        callback();
     }
 
     return this;

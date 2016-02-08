@@ -12,19 +12,6 @@ var isNotWhitelist = true;
 
 const ConstAllSite = '\\AllSite\\';
 
-if (typeof chrome.tabs != 'undefined') {
-    chrome.tabs.query({}, function (tabs) {
-        for (i = 0; i < tabs.length; ++i) {
-            if (tabs[i].active) {
-                if (typeof tabs[i].url.getHostname == 'function') {
-                    hostname = tabs[i].url.getHostname();
-                }
-                break;
-            }
-        }
-    });
-}
-
 function canBlock() {
     if (blockerCount > 15)
         return ((new Date()).getTime() - t1) > timerEps;

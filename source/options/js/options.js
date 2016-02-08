@@ -1,10 +1,10 @@
 $(function () {
-    chrome.storage.sync.get({
+    chrome.storage.local.get({
         rules: [],
         rulesOnline: [],
         rulesData: [],
         apiKey: null,
-        whitelisted: null
+        whitelisted: []
     }, function (items) {
         $('#ads-rules').val(items.rules.join('\n'));
         $('#api-key').val(items.apiKey);
@@ -89,7 +89,7 @@ function setConfig(dataRules, apiKey, whitelisted) {
 
     });
 
-    chrome.storage.sync.set({
+    chrome.storage.local.set({
         rules: dataRules,
         rulesOnline: [],
         rulesData: rulesData,
