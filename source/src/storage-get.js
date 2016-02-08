@@ -15,7 +15,7 @@ function reloadRules(items) {
         _rules = _rules.diff(items.rulesData['^' + hostname]);
     }
 
-    $.each(_rules, function (_key) {
+    jQuery.each(_rules, function (_key) {
         if (_rules[_key].regExp) {
             // rulesRegExp = [];
         }
@@ -25,6 +25,17 @@ function reloadRules(items) {
     });
 
     isNotWhitelist = items.whitelisted.indexOf(hostname) < 0;
+
+    if (typeof chrome.browserAction == 'undefined') {
+        jQuery(document).blocker(function () {
+            jQuery(document).ready(function () {
+                t1 = 0;
+                jQuery(document).bind("DOMSubtreeModified", function () {
+                    jQuery(document).blocker();
+                });
+            });
+        });
+    }
 
 }
 

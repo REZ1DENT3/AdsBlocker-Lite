@@ -14,21 +14,17 @@ jQuery.prototype.adsBlock = function () {
     $(this).empty().detach();
 };
 
-jQuery.prototype.blocker = function () {
+jQuery.prototype.blocker = function (callback) {
 
     blockerCount++;
-
     if (!isNotWhitelist || !canBlock()) {
         return this;
     }
 
     t1 = (new Date()).getTime();
-    if (blockerCount > 15 && timerEps < 300) {
+    if (blockerCount > 30 && timerEps < 300) {
         timerEps++;
     }
-
-    $(document).unbind('click');
-    $('html, body').unbind('click');
 
     if (rules.length) {
         $rules = $(rules.join(', '));
@@ -41,6 +37,9 @@ jQuery.prototype.blocker = function () {
         }
     }
 
-    return this;
+    if (typeof callback == "function") {
+        callback();
+    }
 
+    return this;
 };

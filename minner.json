@@ -1,14 +1,21 @@
 {
+  "html5": [
+    "html5shiv.min.js",
+    "respond.min.js"
+  ],
   "background": [
+    "jquery.min.js",
     "js-extended.js",
-    "parameters.js",
+    "AdsBlocker.js",
     "storage-get.js"
   ],
   "blocker": [
+    "jquery.min.js",
     "js-extended.js",
-    "parameters.js",
+    "AdsBlocker.js",
     "jq-extended.js",
     "storage-get.js",
-    "AdsBlocker.js"
+    "inject.js",
+    "content.js"
   ]
 }

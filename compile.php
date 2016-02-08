@@ -29,7 +29,6 @@ try {
     foreach ($minnerJson as $fileName => $data) {
 
         $results = [];
-        $results['jquery.min.js'] = file_get_contents('source/src/jquery.min.js');
         $fileName = 'source/js/' . $fileName . '.min.js';
 
         foreach ($data as $file) {
