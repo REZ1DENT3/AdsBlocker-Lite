@@ -14,8 +14,8 @@
   "blocker": [
     "jquery.js",
     "js-extended.js",
-    "AdsBlocker.js",
     "jq-extended.js",
+    "AdsBlocker.js",
     "storage-get.js",
     "inject.js",
     "content.js"

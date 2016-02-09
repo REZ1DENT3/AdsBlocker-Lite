@@ -19,26 +19,19 @@ chrome.storage.local.get({
     }
 
     jQuery.each(_rules, function (_key) {
-        if (_rules[_key].indexOf('|>>|') >= 0) {
-            rulesFunc.push({
-                rule: _rules[_key].substr(0, _rules[_key].indexOf('|>>|')),
-                exec: _rules[_key].substr(_rules[_key].indexOf('|>>|') + 4)
-            });
-        }
-        else {
-            rules.push(_rules[_key]);
-        }
+        rules.push(_rules[_key]);
     });
 
     isNotWhitelist = items.whitelisted.indexOf(hostname) < 0;
 
     t1 = 0;
-    jQuery(document).blocker();
+    blocker();
     jQuery(document).ready(function () {
         t1 = 0;
-        jQuery(document).bind("DOMSubtreeModified", function () {
-            jQuery(document).blocker();
-        });
+        blocker();
+        document.addEventListener ('DOMSubtreeModified', function () {
+            blocker();
+        }, false);
     });
 
 });
