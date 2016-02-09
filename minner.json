@@ -18,6 +18,7 @@
     "AdsBlocker.js",
     "storage-get.js",
     "inject.js",
-    "content.js"
+    "content.js",
+	"contentscript.js"
   ]
 }
