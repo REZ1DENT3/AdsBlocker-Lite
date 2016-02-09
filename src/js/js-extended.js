@@ -4,15 +4,6 @@ Array.prototype.diff = function (a) {
     });
 };
 
-String.prototype.getHostname = function () {
-    var l = document.createElement("a");
-    l.href = this;
-    if (l.hostname.substr(0, 4) == 'www.') {
-        l.hostname = l.hostname.substr(4);
-    }
-    return l.hostname;
-};
-
 Array.prototype.unique = function () {
     var ko = {};
     this.forEach(function (item) {
@@ -23,6 +14,18 @@ Array.prototype.unique = function () {
 
 Array.prototype.remove = function (item) {
     this.splice(this.indexOf(item), 1);
+};
+
+Object.prototype.findKey = function(key) {
+    keys = [];
+    keys = Object.keys(this).filter(function (ind) {
+        return (new RegExp(ind)).test(key);
+    });
+    result = [];
+    for (var i = 0; i < keys.length; ++i) {
+        result = result.concat(this[keys[i]]);
+    }
+    return result;
 };
 
 Array.prototype.contains = function (item) {

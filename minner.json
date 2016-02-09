@@ -1,7 +1,6 @@
 {
   "options": [
     "jquery.js",
-    "js-extended.js",
     "AdsBlocker.js",
     "options.js"
   ],

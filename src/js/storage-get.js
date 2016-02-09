@@ -6,8 +6,8 @@ chrome.storage.local.get({
     rules = [];
     _rules = [];
 
-    if (typeof items.rulesData[hostname] != 'undefined') {
-        _rules = items.rulesData[hostname];
+    if (typeof items.rulesData.findKey != 'undefined') {
+        _rules = items.rulesData.findKey(hostname);
     }
 
     if (typeof items.rulesData[ConstAllSite] != 'undefined') {

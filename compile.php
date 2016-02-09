@@ -48,23 +48,24 @@ try {
     $sbversion = sbversion();
     foreach ($minnerJson as $fileName => $data) {
 
-        $results = [];
+        $files = [];
         $fileName = 'source/js/' . $fileName . '.min.js';
 
         $minifier = new Minify\JS();
         foreach ($data as $file) {
             $path = 'src/js/' . $file;
             $minifier->add($path);
-            $results[] = $file;
+            $files[] = $file;
         }
 
-        $data = file_get_contents('src/js/header.js') . $minifier->minify();
-
+        $data = file_get_contents('src/js/header.js');
         $data = str_replace("{version}", $sbversion, $data);
         $data = str_replace("{year}", '2013 - ' . date('Y'), $data);
 
+        $data .= $minifier->execute();
+        $data = str_replace("\n;", ";", $data);
         file_put_contents($fileName, $data);
-        var_dump([$fileName => array_values($results)]);
+        var_dump([$fileName => $files]);
     }
 
     $cssFiles = scandir('src/css');

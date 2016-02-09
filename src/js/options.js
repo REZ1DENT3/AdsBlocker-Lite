@@ -66,14 +66,9 @@ function setConfig(dataRules, apiKey, whitelisted) {
         string = string.split('##');
         _hostname = ConstAllSite;
         rule = null;
-        regExp = false;
 
         if (string[0].length) {
             _hostname = string[0].toLowerCase();
-        }
-
-        if (_hostname.substr(0, 4) == 'www.') {
-            _hostname = _hostname.substr(4);
         }
 
         rule = string[1];
