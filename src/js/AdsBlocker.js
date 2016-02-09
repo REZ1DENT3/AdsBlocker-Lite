@@ -15,19 +15,24 @@ var isNotWhitelist = true;
 const ConstAllSite = '___AllSite___';
 
 function canBlock() {
-    if (blockerCount > 15)
+    if (blockerCount > 15) {
         return ((new Date()).getTime() - t1) > timerEps;
+    }
     return true;
 }
 
 function adsBlock(e) {
-    $.each(e, function(ind, _e) {
-        _e.parentNode.removeChild(_e);
-    });
+    for (var ind in e) {
+        if (typeof e[ind].parentNode != "undefined") {
+            if (typeof e[ind].parentNode.removeChild != "undefined") {
+                //console.log(e[ind]);
+                e[ind].parentNode.removeChild(e[ind]);
+            }
+        }
+    }
 }
 
 function blocker() {
-
     blockerCount++;
     if (!isNotWhitelist || !canBlock()) {
         return this;
@@ -39,31 +44,17 @@ function blocker() {
     }
 
     if (rules.length) {
-
         qsRules = document.querySelectorAll(rules.join(', '));
         blockerRulesCount += qsRules.length;
         if (qsRules.length) {
-
             adsBlock(qsRules);
-
             if (blockerRulesCount) {
                 chrome.runtime.sendMessage({
                     name: "setBadgeText",
                     text: '' + blockerRulesCount
                 });
             }
-
-            $.each(qsRules, function (ind, item) {
-                if (item.addEventListener) {
-                    item.addEventListener ('DOMSubtreeModified', function () {
-                        adsBlock(qsRules);
-                    }, false);
-                }
-            });
-
         }
     }
-
     return this;
-
 }

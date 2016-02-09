@@ -34,9 +34,9 @@ Array.prototype.contains = function (item) {
 
 function map(map, obj) {
     obj = obj || this;
-    $.each(map, function (k, v) {
-        obj[k] = obj[v];
-    });
+    for (var k in map) {
+        obj[k] = obj[map[k]];
+    }
 }
 
 function clone(obj) {
@@ -48,12 +48,12 @@ function now() {
 }
 
 function addScript(template) {
-    var s = document.createElement("script");
+    var script = document.createElement("script");
     if (template.src) {
-        s.src = template.src;
+        script.src = template.src;
     }
     if (template.textContent) {
-        s.textContent = template.textContent;
+        script.textContent = template.textContent;
     }
-    document.documentElement.appendChild(s);
+    document.documentElement.appendChild(script);
 }

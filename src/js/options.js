@@ -1,57 +1,71 @@
-$(function () {
-    chrome.storage.local.get({
-        rules: [],
-        rulesOnline: [],
-        rulesData: [],
-        apiKey: null,
-        whitelisted: []
-    }, function (items) {
-        $('#ads-rules').val(items.rules.join('\n'));
-        $('#api-key').val(items.apiKey);
-        $('#whitelisted').val(items.whitelisted.join('\n'));
+var storageParameters = {
+    rules: [],
+    rulesOnline: [],
+    rulesData: [],
+    apiKey: null,
+    whitelisted: []
+};
 
-        if ($('#api-key').val().trim() == '') {
-            $('#ads-rules-online').attr('disabled', 'disabled');
-        }
-        else {
-            $('#ads-rules-online').removeAttr('disabled', 'disabled');
-        }
-    });
+function adsRulesOnline() {
+    if (document.querySelector('#whitelisted').value == '') {
+        document.querySelector('#ads-rules-online').setAttribute('disabled', true);
+    }
+    else {
+        document.querySelector('#ads-rules-online').removeAttribute('disabled');
+    }
+}
 
-    $('#rules').submit(function () {
-        setConfig(
-            $('#ads-rules').val().split('\n'),
-            $('#api-key').val().trim(),
-            $('#whitelisted').val().split('\n')
-        );
-        return false;
-    });
-});
+document.addEventListener("DOMContentLoaded", function () {
 
-$('#ads-rules-online').click(function () {
-    $.ajax({
-        type: "POST",
-        url: "https://ads.babichev.net/blocker",
-        data: "token=" + $('#api-key').val().trim() + '&values=' + $('#ads-rules').val(),
-        success: function (msg) {
-            console.log(msg);
-        }
+    chrome.storage.local.get(storageParameters, function (items) {
+
+        document.querySelector('#whitelisted').value = items.whitelisted.join('\n');
+        document.querySelector('#ads-rules').value = items.rules.join('\n');
+        document.querySelector('#api-key').value = items.apiKey.trim();
+
+        adsRulesOnline();
+
+        storageParameters = items;
+
     });
 });
 
-$('#ads-rules-get-online').click(function () {
-    $.ajax({
-        type: "GET",
-        url: "https://ads.babichev.net/blocker",
-        success: function (msg) {
-            $('#ads-rules').val(msg);
+document.querySelector('#ads-rules-online').addEventListener("click", function (event) {
+    var http = new XMLHttpRequest();
+    http.onreadystatechange = function() {
+        if (http.readyState == 4 && http.status == 200) {
+            $('#model-success').modal('show'); // todo?
+            console.log(http.responseText);
         }
-    });
+    };
+    token = encodeURIComponent(storageParameters.apiKey);
+    rules = encodeURIComponent(document.querySelector('#ads-rules').value);
+    http.open("POST", "https://ads.babichev.net/blocker", true);
+    http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    http.send("token=" + token + '&values=' + rules);
 });
 
-function setConfig(dataRules, apiKey, whitelisted) {
-    var rulesData = {};
-    dataRules.forEach(function (string) {
+document.querySelector('#ads-rules-get-online').addEventListener("click", function (event) {
+    var http = new XMLHttpRequest();
+    http.onreadystatechange = function() {
+        if (http.readyState == 4 && http.status == 200) {
+            $('#model-success').modal('show'); // todo?
+            document.querySelector('#ads-rules').value = http.responseText;
+        }
+    };
+    http.open("GET", "https://ads.babichev.net/blocker", true);
+    http.send();
+});
+
+document.querySelector('#rules').onsubmit = function (event) {
+
+    storageParameters.whitelisted = document.querySelector('#whitelisted').value.split('\n');
+    storageParameters.rules = document.querySelector('#ads-rules').value.split('\n');
+    storageParameters.apiKey = document.querySelector('#api-key').value.trim();
+
+    storageParameters.rulesData = {};
+
+    storageParameters.rules.forEach(function (string) {
 
         if (!string.length) {
             return;
@@ -73,28 +87,19 @@ function setConfig(dataRules, apiKey, whitelisted) {
 
         rule = string[1];
 
-        if (typeof rulesData[_hostname] == 'undefined') {
-            rulesData[_hostname] = new Array();
+        if (typeof storageParameters.rulesData[_hostname] == 'undefined') {
+            storageParameters.rulesData[_hostname] = new Array();
         }
 
-        rulesData[_hostname].push(rule);
+        storageParameters.rulesData[_hostname].push(rule);
 
     });
 
-    chrome.storage.local.set({
-        rules: dataRules,
-        rulesOnline: [],
-        rulesData: rulesData,
-        apiKey: apiKey,
-        whitelisted: whitelisted
-    }, function () {
-        $('#model-success').modal('show');
-
-        if ($('#api-key').val().trim() == '') {
-            $('#ads-rules-online').attr('disabled', 'disabled');
-        }
-        else {
-            $('#ads-rules-online').removeAttr('disabled', 'disabled');
-        }
+    chrome.storage.local.set(storageParameters, function () {
+        $('#model-success').modal('show'); // todo?
+        adsRulesOnline();
     });
-}
+
+    return false;
+
+};

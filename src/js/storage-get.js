@@ -15,23 +15,21 @@ chrome.storage.local.get({
     }
 
     if (typeof items.rulesData['^' + hostname] != 'undefined') {
-        _rules = _rules.diff(items.rulesData['^' + hostname]);
+        _rules = _rules.diff(items.rulesData['not:' + hostname]);
     }
 
-    jQuery.each(_rules, function (_key) {
-        rules.push(_rules[_key]);
-    });
+    for (var i = 0; i < _rules.length; ++i) {
+        rules.push(_rules[i]);
+    }
 
     isNotWhitelist = items.whitelisted.indexOf(hostname) < 0;
 
     t1 = 0;
     blocker();
-    jQuery(document).ready(function () {
+    document.addEventListener('DOMContentLoaded', function () {
         t1 = 0;
         blocker();
-        document.addEventListener ('DOMSubtreeModified', function () {
-            blocker();
-        }, false);
+        document.addEventListener('DOMSubtreeModified', blocker, false);
     });
 
 });

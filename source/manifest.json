@@ -1,6 +1,6 @@
 {
     "name": "AdsBlocker Lite",
-    "version": "0.167",
+    "version": "0.189",
     "description": "AdsBlocker",
     "manifest_version": 2,
     "content_scripts": [
@@ -11,7 +11,8 @@
             ],
             "js": [
                 "js/blocker.min.js"
-            ]
+            ],
+            "run_at": "document_start"
         }
     ],
     "options_page": "options.html",

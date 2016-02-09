@@ -12,9 +12,7 @@
     "background.js"
   ],
   "blocker": [
-    "jquery.js",
     "js-extended.js",
-    "jq-extended.js",
     "AdsBlocker.js",
     "storage-get.js",
     "inject.js",

@@ -5,7 +5,6 @@ var isChrome = !!window.chrome && !isOpera;
 var player = document.querySelector('#player');
 
 function skipVideoAd() {
-
     if (document.getElementsByClassName('videoAdUi').length > 0) {
         document.getElementsByClassName('video-stream html5-main-video')[0].src = '';
         blockerRulesCount++;
@@ -13,12 +12,12 @@ function skipVideoAd() {
 }
 
 function hideOverlayAd() {
-
-    var overlayAdContainer = document.getElementsByClassName('ad-container ad-container-single-media-element-annotations')[0];
-    if (overlayAdContainer && overlayAdContainer.style.display !== 'none') {
-        overlayAdContainer.style.display = 'none';
-        blockerRulesCount++;
-    }
+    // todo
+    //var overlayAdContainer = document.getElementsByClassName('ad-container ad-container-single-media-element-annotations')[0];
+    //if (overlayAdContainer && overlayAdContainer.style.display !== 'none') {
+    //    overlayAdContainer.style.display = 'none';
+    //    blockerRulesCount++;
+    //}
 }
 
 function clearAds() {
