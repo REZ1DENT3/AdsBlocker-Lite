@@ -1,7 +1,4 @@
-var blockerCount = 0;
 var blockerRulesCount = 0;
-var timerEps = 5;
-var t1 = (new Date()).getTime() - timerEps;
 
 var hostname = window.document.domain;
 if (hostname.substr(0, 4) == 'www.') {
@@ -15,49 +12,33 @@ var isNotWhitelist = true;
 
 const ConstAllSite = '___AllSite___';
 
-function canBlock() {
-    if (blockerCount > 15) {
-        return ((new Date()).getTime() - t1) > timerEps;
-    }
-    return true;
-}
-
 function adsBlock(e) {
-    for (var ind in e) {
-        if (typeof e[ind].parentNode != "undefined") {
+    for (ind = 0; ind < e.length; ++ind) {
+        if (typeof e[ind].parentNode != "undefined" && e[ind].parentNode != null) {
             if (typeof e[ind].parentNode.removeChild != "undefined") {
-                //console.log(e[ind]);
                 e[ind].parentNode.removeChild(e[ind]);
             }
         }
     }
 }
 
-function blocker() {
-    blockerCount++;
-    if (!isNotWhitelist || !canBlock()) {
+function blocker(d) {
+
+    if (!isNotWhitelist) {
         return this;
     }
 
-    t1 = (new Date()).getTime();
-    if (blockerCount > 30 && timerEps < 300) {
-        timerEps++;
-    }
-
     if (rules.length) {
-        qsRules = document.querySelectorAll(rules.join(', '));
+        qsRules = d.querySelectorAll(rules.join(', '));
         blockerRulesCount += qsRules.length;
         if (qsRules.length) {
             adsBlock(qsRules);
         }
     }
 
-    /**
-     * fixme
-     */
     if (rulesExpr.length) {
         for (i = 0; i < rulesExpr.length; ++i) {
-            qsRulesExpr = querySelectorAll(rulesExpr[i]);
+            qsRulesExpr = querySelectorAll(d, rulesExpr[i]);
             blockerRulesCount += qsRulesExpr.length;
             if (qsRulesExpr.length) {
                 adsBlock(qsRulesExpr);

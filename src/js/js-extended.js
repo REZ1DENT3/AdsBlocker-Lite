@@ -60,7 +60,7 @@ function addScript(template) {
 
 var jsExtended = new (function () {
     this.expr = new Array();
-    this.expr[":attr"] = function (sel, selector) {
+    this.expr[":attr"] = function (d, sel, selector) {
         return Array.prototype.slice.call(document.querySelectorAll(sel)).filter(function (element) {
             keys = Array.prototype.slice.call(element.attributes).filter(function (attribute) {
                 return (new RegExp(selector)).test(attribute.name);
@@ -68,17 +68,20 @@ var jsExtended = new (function () {
             return keys.length;
         });
     };
+    this.expr[":removeAll"] = function(d, sel, selector) {
+        return d.querySelectorAll(sel);
+    }
 })();
 
-function querySelectorAll(selector) {
+function querySelectorAll(d, selector) {
     for (var expr in jsExtended.expr) {
         if (typeof expr == "undefined") break;
         regex = new RegExp(expr + '(.*?)$');
         if (regex.test(selector)) {
             newSelector = selector.match(regex);
             newSelector[0] = selector.substr(0, selector.indexOf(expr));
-            return jsExtended.expr[expr](newSelector[0], newSelector[1]);
+            return jsExtended.expr[expr](d, newSelector[0], newSelector[1]);
         }
     }
-    return document.querySelectorAll(selector);
-};
+    return d.querySelectorAll(selector);
+}

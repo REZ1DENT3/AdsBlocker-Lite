@@ -36,12 +36,16 @@ chrome.storage.local.get({
 
     isNotWhitelist = items.whitelisted.indexOf(hostname) < 0;
 
-    t1 = 0;
-    blocker();
-    document.addEventListener('DOMContentLoaded', function () {
-        t1 = 0;
-        blocker();
-        document.addEventListener('DOMSubtreeModified', blocker, false);
-    });
+    document.addEventListener('DOMSubtreeModified', function (mutationEvent) {
+        blocker(mutationEvent.target);
+    }, false);
+
+    //t1 = 0;
+    //blocker(document);
+    //document.addEventListener('DOMContentLoaded', function () {
+    //    t1 = 0;
+    //    blocker();
+    //    document.addEventListener('DOMSubtreeModified', blocker, false);
+    //});
 
 });
