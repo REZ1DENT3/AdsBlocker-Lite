@@ -9,6 +9,7 @@ if (hostname.substr(0, 4) == 'www.') {
 }
 
 var rules = new Array();
+var rulesExpr = new Array();
 
 var isNotWhitelist = true;
 
@@ -48,13 +49,28 @@ function blocker() {
         blockerRulesCount += qsRules.length;
         if (qsRules.length) {
             adsBlock(qsRules);
-            if (blockerRulesCount) {
-                chrome.runtime.sendMessage({
-                    name: "setBadgeText",
-                    text: '' + blockerRulesCount
-                });
+        }
+    }
+
+    /**
+     * fixme
+     */
+    if (rulesExpr.length) {
+        for (i = 0; i < rulesExpr.length; ++i) {
+            qsRulesExpr = querySelectorAll(rulesExpr[i]);
+            blockerRulesCount += qsRulesExpr.length;
+            if (qsRulesExpr.length) {
+                adsBlock(qsRulesExpr);
             }
         }
     }
+
+    if (blockerRulesCount) {
+        chrome.runtime.sendMessage({
+            name: "setBadgeText",
+            text: '' + blockerRulesCount
+        });
+    }
+
     return this;
 }

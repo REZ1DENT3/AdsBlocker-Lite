@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10056b3c-0adc-4fda-90d9-89a1db441bfe" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/js/jq-extended.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
@@ -16,7 +15,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compile.php" afterPath="$PROJECT_DIR$/compile.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/extensions.pem" afterPath="$PROJECT_DIR$/extensions.pem" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minner.json" afterPath="$PROJECT_DIR$/minner.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/js/background.min.js" afterPath="$PROJECT_DIR$/source/js/background.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/js/blocker.min.js" afterPath="$PROJECT_DIR$/source/js/blocker.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/js/html5.min.js" afterPath="$PROJECT_DIR$/source/js/html5.min.js" />
@@ -26,13 +24,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/css/css.css" afterPath="$PROJECT_DIR$/src/css/css.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/AdsBlocker.js" afterPath="$PROJECT_DIR$/src/js/AdsBlocker.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/background.js" afterPath="$PROJECT_DIR$/src/js/background.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/content.js" afterPath="$PROJECT_DIR$/src/js/content.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/contentscript.js" afterPath="$PROJECT_DIR$/src/js/contentscript.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/header.js" afterPath="$PROJECT_DIR$/src/js/header.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/html5shiv.min.js" afterPath="$PROJECT_DIR$/src/js/html5shiv.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/jquery.js" afterPath="$PROJECT_DIR$/src/js/jquery.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/js-extended.js" afterPath="$PROJECT_DIR$/src/js/js-extended.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/options.js" afterPath="$PROJECT_DIR$/src/js/options.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/respond.min.js" afterPath="$PROJECT_DIR$/src/js/respond.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/storage-get.js" afterPath="$PROJECT_DIR$/src/js/storage-get.js" />
     </list>
@@ -62,18 +57,7 @@
     <favorites_list name="extensions" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="minner.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/minner.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35958904">
-              <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -129,11 +113,11 @@
         <option value="$PROJECT_DIR$/src/js/contentscript.js" />
         <option value="$PROJECT_DIR$/src/js/inject.js" />
         <option value="$PROJECT_DIR$/minner.json" />
-        <option value="$PROJECT_DIR$/src/js/js-extended.js" />
         <option value="$PROJECT_DIR$/src/js/options.js" />
-        <option value="$PROJECT_DIR$/src/js/AdsBlocker.js" />
         <option value="$PROJECT_DIR$/source/manifest.json" />
+        <option value="$PROJECT_DIR$/src/js/js-extended.js" />
         <option value="$PROJECT_DIR$/src/js/storage-get.js" />
+        <option value="$PROJECT_DIR$/src/js/AdsBlocker.js" />
       </list>
     </option>
   </component>
@@ -147,7 +131,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="19" />
+    <option name="x" value="12" />
     <option name="y" value="23" />
     <option name="width" value="1346" />
     <option name="height" value="705" />
@@ -177,6 +161,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -297,7 +282,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -361,10 +345,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="19" y="23" width="1346" height="705" extended-state="0" />
-    <editor active="true" />
+    <frame x="12" y="23" width="1346" height="705" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30163446" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30089152" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -613,13 +597,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2739726">
-          <caret line="1542" column="17" selection-start-line="1542" selection-start-column="9" selection-end-line="1542" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/jquery.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3321918">
@@ -645,7 +622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.049342107">
           <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -661,9 +637,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -671,7 +644,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1118421">
           <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -683,27 +655,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/js-extended.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.024671054">
-          <caret line="1" column="37" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DOMCore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33223686">
-          <caret line="736" column="0" selection-start-line="736" selection-start-column="0" selection-end-line="736" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/bootstrap/js/bootstrap.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34767643">
           <caret line="5" column="13689" selection-start-line="5" selection-start-column="13689" selection-end-line="5" selection-end-column="13689" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -719,7 +674,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20547946">
           <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -731,26 +685,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DOMCore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33223686">
+          <caret line="463" column="23" selection-start-line="463" selection-start-column="23" selection-end-line="463" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28289473">
+          <caret line="1542" column="17" selection-start-line="1542" selection-start-column="9" selection-end-line="1542" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/minner.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.75">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/js-extended.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/storage-get.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07401316">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.75328946">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/AdsBlocker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53125">
-          <caret line="46" column="62" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/minner.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35958904">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.45723686">
+          <caret line="59" column="57" selection-start-line="59" selection-start-column="57" selection-end-line="59" selection-end-column="57" />
           <folding />
         </state>
       </provider>

@@ -16,7 +16,7 @@ Array.prototype.remove = function (item) {
     this.splice(this.indexOf(item), 1);
 };
 
-Object.prototype.findKey = function(key) {
+Object.prototype.findKey = function (key) {
     keys = [];
     keys = Object.keys(this).filter(function (ind) {
         return (new RegExp(ind)).test(key);
@@ -57,3 +57,28 @@ function addScript(template) {
     }
     document.documentElement.appendChild(script);
 }
+
+var jsExtended = new (function () {
+    this.expr = new Array();
+    this.expr[":attr"] = function (sel, selector) {
+        return Array.prototype.slice.call(document.querySelectorAll(sel)).filter(function (element) {
+            keys = Array.prototype.slice.call(element.attributes).filter(function (attribute) {
+                return (new RegExp(selector)).test(attribute.name);
+            });
+            return keys.length;
+        });
+    };
+})();
+
+function querySelectorAll(selector) {
+    for (var expr in jsExtended.expr) {
+        if (typeof expr == "undefined") break;
+        regex = new RegExp(expr + '(.*?)$');
+        if (regex.test(selector)) {
+            newSelector = selector.match(regex);
+            newSelector[0] = selector.substr(0, selector.indexOf(expr));
+            return jsExtended.expr[expr](newSelector[0], newSelector[1]);
+        }
+    }
+    return document.querySelectorAll(selector);
+};

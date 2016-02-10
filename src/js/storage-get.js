@@ -4,6 +4,7 @@ chrome.storage.local.get({
 }, function (items) {
 
     rules = [];
+    rulesExpr = [];
     _rules = [];
 
     if (typeof items.rulesData.findKey != 'undefined') {
@@ -19,7 +20,18 @@ chrome.storage.local.get({
     }
 
     for (var i = 0; i < _rules.length; ++i) {
-        rules.push(_rules[i]);
+        var isExpr = false;
+        for (var expr in jsExtended.expr) {
+            if (isExpr || typeof expr == "undefined") break;
+            regex = new RegExp(expr + '(.*?)$');
+            isExpr = regex.test(_rules[i]);
+        }
+        if (isExpr) {
+            rulesExpr.push(_rules[i]);
+        }
+        else {
+            rules.push(_rules[i]);
+        }
     }
 
     isNotWhitelist = items.whitelisted.indexOf(hostname) < 0;
