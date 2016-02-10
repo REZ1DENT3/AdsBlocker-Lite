@@ -68,19 +68,24 @@ var jsExtended = new (function () {
             return keys.length;
         });
     };
-    this.expr[":removeAll"] = function(d, sel, selector) {
+    this.expr[":removeAll"] = function(d, sel) {
         return d.querySelectorAll(sel);
-    }
+    };
 })();
 
 function querySelectorAll(d, selector) {
-    for (var expr in jsExtended.expr) {
-        if (typeof expr == "undefined") break;
-        regex = new RegExp(expr + '(.*?)$');
-        if (regex.test(selector)) {
-            newSelector = selector.match(regex);
-            newSelector[0] = selector.substr(0, selector.indexOf(expr));
-            return jsExtended.expr[expr](d, newSelector[0], newSelector[1]);
+    if (typeof d == "undefined" || d == null || typeof d.querySelectorAll == "undefined") {
+        return [];
+    }
+    if (selector.indexOf(':') >= 0) {
+        for (var expr in jsExtended.expr) {
+            if (typeof expr == "undefined") break;
+            regex = new RegExp(expr + '(.*?)$');
+            if (regex.test(selector)) {
+                newSelector = selector.match(regex);
+                newSelector[0] = selector.substr(0, selector.indexOf(expr));
+                return jsExtended.expr[expr](d, newSelector[0], newSelector[1]);
+            }
         }
     }
     return d.querySelectorAll(selector);

@@ -29,7 +29,7 @@ function blocker(d) {
     }
 
     if (rules.length) {
-        qsRules = d.querySelectorAll(rules.join(', '));
+        qsRules = querySelectorAll(d, rules.join(', '));
         blockerRulesCount += qsRules.length;
         if (qsRules.length) {
             adsBlock(qsRules);
