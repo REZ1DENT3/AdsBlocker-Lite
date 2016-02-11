@@ -52,8 +52,7 @@ try {
                 $value->type = mb_strtoupper($value->type);
                 $last[$value->type][] = explode('+', $value->data);
             }
-        }
-        else {
+        } else {
             $rules[$data->type][$fileName] = $data->data;
         }
     }
@@ -72,22 +71,19 @@ try {
                 if (!isset($caches[$type][$file])) {
 
                     $minifier = new $namespace();
+                    $path = 'src/' . mb_strtolower($type) . '/' . $file;
 
-                    if (filter_var($file, FILTER_VALIDATE_URL)) {
-
-                        if (file_exists('cache/' . md5($file))) {
-                            $caches[$type][$file] = file_get_contents('cache/' . md5($file));
-                        }
-                        else {
-                            $minifier->add(file_get_contents($file));
-                            $caches[$type][$file] = $minifier->minify();
-                            file_put_contents('cache/' . md5($file), $caches[$type][$file]);
-                        }
-
+                    if (file_exists('cache/' . md5($file))) {
+                        $caches[$type][$file] = file_get_contents('cache/' . md5($file));
                     }
-                    else {
+                    else if (file_exists($path)) {
                         $minifier->add('src/' . mb_strtolower($type) . '/' . $file);
                         $caches[$type][$file] = $minifier->minify();
+                    }
+                    else {
+                        $minifier->add(file_get_contents($file));
+                        $caches[$type][$file] = $minifier->minify();
+                        file_put_contents('cache/' . md5($file), $caches[$type][$file]);
                     }
 
                 }
@@ -133,7 +129,6 @@ try {
 
     echo PHP_EOL, "complete!", PHP_EOL, PHP_EOL;
 
-}
-catch (\Exception $e) {
+} catch (\Exception $e) {
     var_dump($e);
 }
