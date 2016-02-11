@@ -2,8 +2,6 @@
 
 include_once "vendor/autoload.php";
 
-use MatthiasMullie\Minify;
-
 function build()
 {
     return (int)trim(file_get_contents('build'));
@@ -25,12 +23,12 @@ function sbversion()
 {
     nextBuild();
     $sb = version();
-    $manifest = file_get_contents('source/manifest.json');
+    $manifest = file_get_contents('blocker/manifest.json');
     $manifest = (array)json_decode($manifest);
     $manifest['version'] = "$sb";
     $manifest = json_encode($manifest, JSON_PRETTY_PRINT);
     $manifest = str_replace("\\/", "/", $manifest);
-    file_put_contents('source/manifest.json', $manifest);
+    file_put_contents('blocker/manifest.json', $manifest);
     return $sb;
 }
 
@@ -41,40 +39,100 @@ if (isset($argv[1]) && $argv[1] == '-v') {
 
 try {
 
+    $sbversion = sbversion();
+
     $minnerJson = file_get_contents('minner.json');
     $minnerJson = json_decode($minnerJson);
 
-    $caches = [];
-    $sbversion = sbversion();
+    $rules = [];
+    $last = [];
     foreach ($minnerJson as $fileName => $data) {
+        if ($fileName == '[UnionAll]') {
+            foreach ($data as $value) {
+                $value->type = mb_strtoupper($value->type);
+                $last[$value->type][] = explode('+', $value->data);
+            }
+        }
+        else {
+            $rules[$data->type][$fileName] = $data->data;
+        }
+    }
 
-        $files = [];
-        $fileName = 'source/js/' . $fileName . '.min.js';
 
-        $minifier = new Minify\JS();
+    $caches = [];
+    $allFiles = [];
+    foreach ($rules as $type => $data) {
+        $type = mb_strtoupper($type);
+        $namespace = "\\MatthiasMullie\\Minify\\" . $type;
+        foreach ($data as $fileName => $files) {
+
+            $allFiles[$type][$fileName] = "";
+            foreach ($files as $file) {
+
+                if (!isset($caches[$type][$file])) {
+
+                    $minifier = new $namespace();
+
+                    if (filter_var($file, FILTER_VALIDATE_URL)) {
+
+                        if (file_exists('cache/' . md5($file))) {
+                            $caches[$type][$file] = file_get_contents('cache/' . md5($file));
+                        }
+                        else {
+                            $minifier->add(file_get_contents($file));
+                            $caches[$type][$file] = $minifier->minify();
+                            file_put_contents('cache/' . md5($file), $caches[$type][$file]);
+                        }
+
+                    }
+                    else {
+                        $minifier->add('src/' . mb_strtolower($type) . '/' . $file);
+                        $caches[$type][$file] = $minifier->minify();
+                    }
+
+                }
+
+                $allFiles[$type][$fileName] .= PHP_EOL . $caches[$type][$file];
+
+            }
+
+        }
+    }
+
+    $unionAllFiles = [];
+    foreach ($last as $type => $data) {
         foreach ($data as $file) {
-            $path = 'src/js/' . $file;
-            $minifier->add($path);
-            $files[] = $file;
+            $srcName = implode('+', $file);
+            foreach ($file as $data) {
+                $unionAllFiles[$type][$srcName][] = $allFiles[$type][$data];
+            }
+            $allFiles[$type][$srcName] = implode(';', $unionAllFiles[$type][$srcName]);
+        }
+    }
+
+    $header = file_get_contents('src/header');
+    $header = str_replace("{version}", $sbversion, $header);
+    $header = str_replace("{year}", '2013 - ' . date('Y'), $header);
+
+    echo PHP_EOL, $header, PHP_EOL;
+    foreach ($allFiles as $type => $dataFiles) {
+        $typePath = mb_strtolower($type);
+        $maxLength = 0;
+        foreach ($dataFiles as $fileName => $data) {
+            $fileName = 'blocker/' . $typePath . '/' . $fileName . '.min.' . $typePath;
+            file_put_contents($fileName, $header . $data);
+            $maxLength = max($maxLength, mb_strlen(mb_strlen($data)));
         }
 
-        $data = file_get_contents('src/js/header.js');
-        $data = str_replace("{version}", $sbversion, $data);
-        $data = str_replace("{year}", '2013 - ' . date('Y'), $data);
-
-        $data .= $minifier->execute();
-        $data = str_replace("\n;", ";", $data);
-        file_put_contents($fileName, $data);
-        var_dump([$fileName => $files]);
+        $maxLength++;
+        foreach ($dataFiles as $fileName => $data) {
+            $fileName = 'blocker/' . $typePath . '/' . $fileName . '.min.' . $typePath;
+            printf("%-" . $maxLength . "d| fileName: %s" . PHP_EOL, mb_strlen($data), $fileName);
+        }
     }
 
-    $cssFiles = scandir('src/css');
-    unset($cssFiles[0], $cssFiles[1]);
-    $minifier = new Minify\CSS();
-    foreach ($cssFiles as $file) {
-        $minifier->add('src/css/' . $file);
-    }
-    $minifier->minify('source/css/css.css');
+    echo PHP_EOL, "complete!", PHP_EOL, PHP_EOL;
+
 }
 catch (\Exception $e) {
     var_dump($e);

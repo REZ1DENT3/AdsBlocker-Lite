@@ -2,7 +2,7 @@ var storageParameters = {
     rules: [],
     rulesOnline: [],
     rulesData: [],
-    apiKey: null,
+    apiKey: "",
     whitelisted: []
 };
 

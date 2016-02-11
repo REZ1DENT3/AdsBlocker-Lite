@@ -1,22 +1,42 @@
 {
-  "options": [
-    "jquery.js",
-    "AdsBlocker.js",
-    "options.js"
-  ],
-  "html5": [
-    "html5shiv.min.js",
-    "respond.min.js"
-  ],
-  "background": [
-    "background.js"
-  ],
-  "blocker": [
-    "js-extended.js",
-    "AdsBlocker.js",
-    "storage-get.js",
-    "inject.js",
-    "content.js",
-	"contentscript.js"
-  ]
+  "css": {
+    "type": "css",
+    "data": [
+      "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css",
+      "css.css"
+    ]
+  },
+  "background": {
+    "type": "js",
+    "data": [
+      "background.js"
+    ]
+  },
+  "options": {
+    "type": "js",
+    "data": [
+      "jquery.js",
+      "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js",
+      "AdsBlocker.js",
+      "options.js"
+    ]
+  },
+  "html5": {
+    "type": "js",
+    "data": [
+      "html5shiv.min.js",
+      "respond.min.js"
+    ]
+  },
+  "blocker": {
+    "type": "js",
+    "data": [
+      "js-extended.js",
+      "AdsBlocker.js",
+      "storage-get.js",
+      "inject.js",
+      "content.js",
+      "contentscript.js"
+    ]
+  }
 }

@@ -1,6 +1,0 @@
-/**
- *  @author REZ1DENT3, Babichev Maxim
- *  @site https://babichev.net
- *  @year {year}
- *  @version {version}
- */
