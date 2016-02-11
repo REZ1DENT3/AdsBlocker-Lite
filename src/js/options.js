@@ -6,17 +6,19 @@ var storageParameters = {
     whitelisted: []
 };
 
-var dialog = document.querySelector('dialog');
-if (!dialog.showModal) {
-    dialogPolyfill.registerDialog(dialog);
-}
+var data = {
+    message: 'Button color changed.',
+    timeout: 2000,
+    actionHandler: function () {
+        
+    },
+    actionText: 'Undo'
+};
 
-dialog.querySelector('.close').addEventListener('click', function () {
-    dialog.close();
-});
+var snackbarContainer = document.querySelector('#adsblocker-snackbar');
 
 function dialogSetMessage(msg) {
-    dialog.querySelector('#dialog-text').innerText = msg;
+    data.message = msg;
 }
 
 function adsRulesOnline() {
@@ -50,11 +52,11 @@ document.querySelector('#ads-rules-online').addEventListener("click", function (
             http = JSON.parse(http.responseText);
             if (http.status == 200) {
                 dialogSetMessage("Data on the server were successfully loaded!");
-                dialog.showModal();
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
             }
             else {
                 dialogSetMessage("There was a mistake!");
-                dialog.showModal();
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
             }
         }
     };
@@ -71,12 +73,12 @@ document.querySelector('#ads-rules-get-online').addEventListener("click", functi
         if (http.readyState == 4) {
             if (http.status == 200) {
                 dialogSetMessage("Data from the server were successfully obtained!");
-                dialog.showModal();
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
                 document.querySelector('#ads-rules').value = http.responseText;
             }
             else {
                 dialogSetMessage("There was a mistake!");
-                dialog.showModal();
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
             }
         }
     };
@@ -125,7 +127,7 @@ document.querySelector('#rules').onsubmit = function (event) {
     chrome.storage.local.set(storageParameters, function () {
 
         dialogSetMessage("Data are kept!");
-        dialog.showModal();
+        snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
         adsRulesOnline();
     });
