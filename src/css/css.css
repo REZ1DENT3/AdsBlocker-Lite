@@ -1,3 +1,61 @@
-body {
-    padding-top: 7px;
+#view-source {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+}
+
+.adsblocker-ribbon {
+    width: 100%;
+    height: 40vh;
+    background-color: #49b59d;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+
+.adsblocker-main {
+    margin-top: -35vh;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+
+.adsblocker-header .mdl-layout__header-row {
+    padding-left: 40px;
+}
+
+.adsblocker-container {
+    max-width: 1600px;
+    width: calc(100% - 16px);
+    margin: 0 auto;
+}
+
+.adsblocker-content {
+    border-radius: 2px;
+    padding: 80px 56px;
+    margin-bottom: 80px;
+}
+
+.adsblocker-layout.is-small-screen .adsblocker-content {
+    padding: 40px 28px;
+}
+
+.adsblocker-content h3 {
+    margin-top: 48px;
+}
+
+.adsblocker-footer {
+    padding-left: 40px;
+}
+
+.adsblocker-footer .mdl-mini-footer--link-list a {
+    font-size: 13px;
+}
+
+.mdl-textfield {
+    width: 100% !important;
 }

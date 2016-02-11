@@ -1,73 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Options</title>
-
-    <!-- Bootstrap -->
-    <link href="/css/css.min.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="/js/html5.min.js"></script>
-    <![endif]-->
-
+    <title>AdsBlocker Lite</title>
+    <link rel="stylesheet" href="/css/css.min.css">
 </head>
 <body>
-<div class="container">
-    <div class="well">
-        <h3 class="text-center">AdsBlocker Lite</h3>
-    </div>
+<div class="adsblocker-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+    <header class="adsblocker-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title">AdsBlocker Lite</span>
+            <!--<div class="mdl-layout-spacer"></div>-->
+            <!--<div class="mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;expandable">-->
+            <!--<label class="mdl-button mdl-js-button mdl-button&#45;&#45;icon" for="search">-->
+            <!--<i class="material-icons">search</i>-->
+            <!--</label>-->
+            <!--<div class="mdl-textfield__expandable-holder">-->
+            <!--<input class="mdl-textfield__input" type="text" id="search">-->
+            <!--<label class="mdl-textfield__label" for="search">Enter your query...</label>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+    </header>
+    <div class="adsblocker-ribbon"></div>
+    <main class="adsblocker-main mdl-layout__content">
+        <div class="adsblocker-container mdl-grid">
+            <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+            <div class="adsblocker-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
 
-    <div id="model-success" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title">Success</h4>
-                </div>
-                <div class="modal-body">The configuration is successfully kept!</div>
-            </div>
-        </div>
-    </div>
+                <dialog class="mdl-dialog">
+                    <div class="mdl-dialog__content">
+                        <p id="dialog-text"><p>
+                    </div>
+                    <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+                        <button type="button" class="mdl-button close">close</button>
+                    </div>
+                </dialog>
 
-    <form id="rules">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="ads-rules">Rules:</label>
-                    <textarea class="form-control" rows="15" id="ads-rules"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="api-key">API key:</label>
-                    <input class="form-control" type="text" name="api-key" id="api-key"/>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="whitelisted">Whitelisted domains:</label>
-                    <textarea class="form-control" rows="18" id="whitelisted"></textarea>
-                </div>
+                <form id="rules">
+                    <div class="mdl-grid">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <textarea class="mdl-textfield__input" rows="15" id="ads-rules"></textarea>
+                            <label class="mdl-textfield__label" for="ads-rules">Rules...</label>
+                        </div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <textarea class="mdl-textfield__input" rows="18" id="whitelisted"></textarea>
+                            <label class="mdl-textfield__label" for="whitelisted">Whitelisted domains...</label>
+                        </div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" name="api-key" id="api-key"/>
+                            <label class="mdl-textfield__label" for="api-key">API key...</label>
+                        </div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
+                            <button type="submit"
+                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Save
+                            </button>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
+                            <a id="ads-rules-get-online"
+                               class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Update rules
+                                from Server</a>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
+                            <a id="ads-rules-online"
+                               class="mdl-button mdl-js-button mdl-button--accent mdl-button--raised mdl-js-ripple-effect">Update rules in
+                                Server</a>
+                        </div>
+                    </div>
+                </form>
+
+
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-success btn-block">Save</button>
+        <footer class="adsblocker-footer mdl-mini-footer">
+            <div class="mdl-mini-footer--left-section">
+                <!--<ul class="mdl-mini-footer&#45;&#45;link-list">-->
+                <!--<li><a href="#">Help</a></li>-->
+                <!--<li><a href="#">Privacy and Terms</a></li>-->
+                <!--<li><a href="#">User Agreement</a></li>-->
+                <!--</ul>-->
             </div>
-            <div class="col-md-4">
-                <a id="ads-rules-get-online" class="btn btn-warning btn-block">Update rules from Server</a>
-            </div>
-            <div class="col-md-4">
-                <a id="ads-rules-online" class="btn btn-info btn-block">Update rules in Server</a>
-            </div>
-        </div>
-    </form>
+        </footer>
+    </main>
 </div>
 
 <script type="text/javascript" src="/js/options.min.js"></script>

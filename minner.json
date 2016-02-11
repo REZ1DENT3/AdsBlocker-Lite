@@ -2,7 +2,9 @@
   "css": {
     "type": "css",
     "data": [
-      "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css",
+      "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&lang=en",
+      "https://fonts.googleapis.com/icon?family=Material+Icons",
+      "node_modules/material-design-lite/material.css",
       "css.css"
     ]
   },
@@ -15,8 +17,7 @@
   "options": {
     "type": "js",
     "data": [
-      "jquery.js",
-      "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js",
+      "node_modules/material-design-lite/material.js",
       "AdsBlocker.js",
       "options.js"
     ]

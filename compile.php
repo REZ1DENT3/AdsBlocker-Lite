@@ -120,10 +120,9 @@ try {
             $maxLength = max($maxLength, mb_strlen(mb_strlen($data)));
         }
 
-        $maxLength++;
         foreach ($dataFiles as $fileName => $data) {
             $fileName = 'blocker/' . $typePath . '/' . $fileName . '.min.' . $typePath;
-            printf("%-" . $maxLength . "d| fileName: %s" . PHP_EOL, mb_strlen($data), $fileName);
+            printf("length: %-" . $maxLength . "d\t fileName: %s" . PHP_EOL, mb_strlen($data), $fileName);
         }
     }
 

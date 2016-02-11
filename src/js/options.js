@@ -6,8 +6,21 @@ var storageParameters = {
     whitelisted: []
 };
 
+var dialog = document.querySelector('dialog');
+if (!dialog.showModal) {
+    dialogPolyfill.registerDialog(dialog);
+}
+
+dialog.querySelector('.close').addEventListener('click', function () {
+    dialog.close();
+});
+
+function dialogSetMessage(msg) {
+    dialog.querySelector('#dialog-text').innerText = msg;
+}
+
 function adsRulesOnline() {
-    if (document.querySelector('#whitelisted').value == '') {
+    if (document.querySelector('#api-key').value == '') {
         document.querySelector('#ads-rules-online').setAttribute('disabled', true);
     }
     else {
@@ -32,10 +45,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.querySelector('#ads-rules-online').addEventListener("click", function (event) {
     var http = new XMLHttpRequest();
-    http.onreadystatechange = function() {
-        if (http.readyState == 4 && http.status == 200) {
-            $('#model-success').modal('show'); // todo?
-            console.log(http.responseText);
+    http.onreadystatechange = function () {
+        if (http.readyState == 4) {
+            http = JSON.parse(http.responseText);
+            if (http.status == 200) {
+                dialogSetMessage("Data on the server were successfully loaded!");
+                dialog.showModal();
+            }
+            else {
+                dialogSetMessage("There was a mistake!");
+                dialog.showModal();
+            }
         }
     };
     token = encodeURIComponent(storageParameters.apiKey);
@@ -47,10 +67,17 @@ document.querySelector('#ads-rules-online').addEventListener("click", function (
 
 document.querySelector('#ads-rules-get-online').addEventListener("click", function (event) {
     var http = new XMLHttpRequest();
-    http.onreadystatechange = function() {
-        if (http.readyState == 4 && http.status == 200) {
-            $('#model-success').modal('show'); // todo?
-            document.querySelector('#ads-rules').value = http.responseText;
+    http.onreadystatechange = function () {
+        if (http.readyState == 4) {
+            if (http.status == 200) {
+                dialogSetMessage("Data from the server were successfully obtained!");
+                dialog.showModal();
+                document.querySelector('#ads-rules').value = http.responseText;
+            }
+            else {
+                dialogSetMessage("There was a mistake!");
+                dialog.showModal();
+            }
         }
     };
     http.open("GET", "https://ads.babichev.net/blocker", true);
@@ -96,7 +123,10 @@ document.querySelector('#rules').onsubmit = function (event) {
     });
 
     chrome.storage.local.set(storageParameters, function () {
-        $('#model-success').modal('show'); // todo?
+
+        dialogSetMessage("Data are kept!");
+        dialog.showModal();
+
         adsRulesOnline();
     });
 
