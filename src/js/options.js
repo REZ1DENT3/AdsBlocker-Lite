@@ -31,25 +31,6 @@ var snackbarContainer = document.querySelector('#adsblocker-snackbar');
 //    http.send("token=" + token + '&values=' + rules);
 //});
 
-//document.querySelector('#ads-rules-get-online').addEventListener("click", function (event) {
-//    var http = new XMLHttpRequest();
-//    http.onreadystatechange = function () {
-//        if (http.readyState == 4) {
-//            if (http.status == 200) {
-//                dialogSetMessage("Data from the server were successfully obtained!");
-//                snackbarContainer.MaterialSnackbar.showSnackbar(data);
-//                document.querySelector('#ads-rules').value = http.responseText;
-//            }
-//            else {
-//                dialogSetMessage("There was a mistake!");
-//                snackbarContainer.MaterialSnackbar.showSnackbar(data);
-//            }
-//        }
-//    };
-//    http.open("GET", "https://ads.babichev.net/blocker", true);
-//    http.send();
-//});
-
 function addRuleInString(string) {
 
     string = string.trim();
@@ -80,6 +61,56 @@ function addRuleInString(string) {
 
 }
 
+
+function repoVisibility($) {
+    $.onclick = function(event) {
+        repoURL = this.parentNode.parentNode.querySelector('[id^="repo-id"').value;
+        myRepository = null;
+        for (i = 0; i < storageParameters.repositories.length; ++i) {
+            if (storageParameters.repositories[i].url == repoURL) {
+                myRepository = storageParameters.repositories[i];
+                break;
+            }
+        }
+
+        if (myRepository) {
+
+            $aVisibility = document.querySelector('[href="#repo-visibility-panel"]');
+            $aVisibility.classList.remove('hidden');
+
+            document.querySelector('.mdl-tabs__tab-bar .is-active').classList.remove('is-active');
+            document.querySelector('.mdl-tabs__panel.is-active').classList.remove('is-active');
+
+            $aVisibility.classList.add('is-active');
+
+            $panel = document.querySelector('#repo-visibility-panel');
+            $panel.classList.add('is-active');
+
+            if (myRepository.apiKey.trim().length) {
+                $panel.querySelector('form [type="submit"]').removeAttribute('disabled');
+            }
+            else {
+                $panel.querySelector('form [type="submit"]').setAttribute('disabled', true);
+            }
+
+            $panel.querySelector('input').value = myRepository.url;
+            $panel.querySelector('textarea').value = myRepository.data.join('\n');
+
+            $panel.querySelector('input').parentNode.removeAttribute('data-upgraded');
+            $panel.querySelector('textarea').parentNode.removeAttribute('data-upgraded');
+
+            componentHandler.upgradeDom('MaterialTextfield');
+
+        }
+        else {
+            saveConfig('Repo not found!');
+        }
+        return false;
+    }
+}
+
+repoVisibility(document.querySelector('.repo-visibility'));
+
 function append(url, apiKey) {
 
     if (typeof url == "undefined") {
@@ -100,7 +131,7 @@ function append(url, apiKey) {
 
     $rnd = Math.round(Math.random() * 10000);
 
-    $repo.id = '';
+    $repo.id = 'repo-' + $rnd;
     $repo.querySelector('#apikey-id-new').id = 'apikey-id-' + $rnd;
     $repo.querySelector('[for=apikey-id-new]').setAttribute('for', 'apikey-id-' + $rnd);
     $repo.querySelector('#repo-id-new').id = 'repo-id-' + $rnd;
@@ -109,6 +140,8 @@ function append(url, apiKey) {
     if (!$repo.querySelector('#repo-id-' + $rnd).value.length) {
         $repo.parentNode.removeChild($repo);
     }
+
+    repoVisibility($newRepo.querySelector('.repo-visibility'));
 
     document.querySelector('#repositories-panel form')
         .appendChild($newRepo);
@@ -143,6 +176,48 @@ function saveConfig(msg) {
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
     });
 }
+
+
+document.querySelector('#repo-visibility-panel').onsubmit = function (event) {
+    ind = null;
+    url = this.querySelector('input').value;
+    for (i = 0; i < storageParameters.repositories.length; ++i) {
+        if (storageParameters.repositories[i].url == url) {
+            ind = i;
+            break;
+        }
+    }
+    if (ind != null) {
+        text = this.querySelector('textarea').value;
+        storageParameters.repositories[ind].data = text.split('\n');
+        saveConfig();
+        ajax({
+            method: "POST",
+            data: {
+                token: storageParameters.repositories[ind].apiKey,
+                values: text
+            },
+            url: storageParameters.repositories[ind].url,
+            success: function(http) {
+                json = JSON.parse(http.target.response);
+                if (Number(json.status) == 200) {
+                    saveConfig('On the server parameters are updated!');
+                }
+                else {
+                    saveConfig('Error!');
+                }
+            },
+            fail: function(http) {
+                saveConfig('Error!');
+            }
+        });
+    }
+    else {
+        saveConfig('Error!');
+    }
+
+    return false;
+};
 
 document.querySelector('#whitelisted-panel form').onsubmit = function (event) {
     storageParameters.whitelisted = document.querySelector('#whitelisted').value.split('\n');
@@ -180,7 +255,7 @@ document.querySelector('#update').onclick = function (event) {
 document.querySelector('#repositories-panel form').onsubmit = function (event) {
 
     $divs = this.querySelectorAll('.mdl-grid:not(.div-buttons)');
-    storageParameters.repositories = new Array();
+    repos = new Array();
     for (i = 0; i < $divs.length; ++i) {
         url = $divs[i].querySelector('[id^="repo-id-"]').value;
         apiKey = $divs[i].querySelector('[id^="apikey-id-"]').value;
@@ -188,9 +263,19 @@ document.querySelector('#repositories-panel form').onsubmit = function (event) {
         if (!url.length)
             continue;
 
-        storageParameters.repositories.push(new repository(url, apiKey));
-    }
+        newRepo = new repository(url, apiKey);
 
+        for (j = 0; j < storageParameters.repositories.length; ++j) {
+            if (storageParameters.repositories[i].url == url) {
+                newRepo.data = storageParameters.repositories[i].data;
+                newRepo.updated = storageParameters.repositories[i].updated;
+                break;
+            }
+        }
+
+        repos.push(newRepo);
+    }
+    storageParameters.repositories = repos;
     saveConfig();
     return false;
 };

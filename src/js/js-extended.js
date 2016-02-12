@@ -143,10 +143,22 @@ function ajax(options) {
     http.onerror = options.fail;
     http.onprogress = options.progress;
 
-    url = options.url + "?" + options.data.serialize();
+    if (options.method == "GET") {
+        url = options.url + "?" + options.data.serialize();
+    }
+    else {
+        url = options.url
+    }
 
     http.open(options.method, url, options.async);
     http.setRequestHeader('Content-Type', options.contentType);
-    http.send();
+
+
+    if (options.method == "GET") {
+        http.send();
+    }
+    else {
+        http.send(options.data.serialize());
+    }
 
 }

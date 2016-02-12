@@ -41,6 +41,8 @@
                         <a href="#myrules-panel" class="mdl-tabs__tab is-active">My Rules</a>
                         <a href="#whitelisted-panel" class="mdl-tabs__tab">White list</a>
                         <a href="#repositories-panel" class="mdl-tabs__tab">Repositories</a>
+                        <a href="#youtube-panel" class="mdl-tabs__tab">Youtube</a>
+                        <a href="#repo-visibility-panel" class="mdl-tabs__tab hidden">Preview</a>
                     </div>
 
                     <div class="mdl-tabs__panel is-active" id="myrules-panel">
@@ -54,7 +56,10 @@
 
                             <div class="mdl-grid">
                                 <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
-                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Save</button>
+                                    <button type="submit"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                        Save
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -71,7 +76,10 @@
 
                             <div class="mdl-grid">
                                 <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
-                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Save</button>
+                                    <button type="submit"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                        Save
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -81,53 +89,101 @@
                         <form>
 
                             <div id="repo-new" class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--7-col mdl-cell--7-col-tablet">
+                                <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" id="repo-id-new" />
+                                        <input class="mdl-textfield__input" id="repo-id-new"/>
                                         <label class="mdl-textfield__label" for="repo-id-new">Repo url...</label>
                                     </div>
                                 </div>
                                 <div class="mdl-cell mdl-cell--5-col mdl-cell--5-col-tablet">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" id="apikey-id-new" />
+                                        <input class="mdl-textfield__input" id="apikey-id-new"/>
                                         <label class="mdl-textfield__label" for="apikey-id-new">API Key...</label>
                                     </div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet">
+                                    <a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored repo-visibility">
+                                        <i class="material-icons">visibility</i>
+                                    </a>
                                 </div>
                             </div>
 
                             <div class="mdl-grid div-buttons">
                                 <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
-                                    <a id="newLine" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">New Line</a>
+                                    <a id="newLine"
+                                       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">New
+                                        Line</a>
                                 </div>
                                 <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
-                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Save</button>
+                                    <button type="submit"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                        Save
+                                    </button>
                                 </div>
                                 <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
-                                    <a id="update" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">update</a>
+                                    <a id="update"
+                                       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">update</a>
                                 </div>
                             </div>
 
                         </form>
                     </div>
 
+                    <div class="mdl-tabs__panel" id="youtube-panel">
+                        <form>
+                            <div class="mdl-grid">
+                                <h3 class="center">There is a development of the module</h3>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="mdl-tabs__panel" id="repo-visibility-panel">
+                        <form>
+
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input disabled class="mdl-textfield__input" id="repo-visibility-input"/>
+                                    <label class="mdl-textfield__label" for="repo-visibility-input">Repo url...</label>
+                                </div>
+                            </div>
+
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" id="repo-visibility-textarea"
+                                              rows="15"></textarea>
+                                    <label class="mdl-textfield__label" for="repo-visibility-textarea">Rules...</label>
+                                </div>
+                            </div>
+
+                            <div class="mdl-grid div-buttons">
+                                <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
+                                    <button type="submit" disabled
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                        Save and update
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
                     <!--<div class="mdl-grid">-->
-                        <!--<div class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;4-col-phone">-->
-                            <!--<button type="submit"-->
-                                    <!--class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect">Save-->
-                            <!--</button>-->
-                        <!--</div>-->
-                        <!--<div class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;4-col-phone">-->
-                            <!--<a id="ads-rules-get-online"-->
-                               <!--class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-button&#45;&#45;colored mdl-js-ripple-effect">Update-->
-                                <!--rules-->
-                                <!--from Server</a>-->
-                        <!--</div>-->
-                        <!--<div class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;4-col-phone">-->
-                            <!--<a id="ads-rules-online"-->
-                               <!--class="mdl-button mdl-js-button mdl-button&#45;&#45;accent mdl-button&#45;&#45;raised mdl-js-ripple-effect">Update-->
-                                <!--rules in-->
-                                <!--Server</a>-->
-                        <!--</div>-->
+                    <!--<div class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;4-col-phone">-->
+                    <!--<button type="submit"-->
+                    <!--class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect">Save-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--<div class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;4-col-phone">-->
+                    <!--<a id="ads-rules-get-online"-->
+                    <!--class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-button&#45;&#45;colored mdl-js-ripple-effect">Update-->
+                    <!--rules-->
+                    <!--from Server</a>-->
+                    <!--</div>-->
+                    <!--<div class="mdl-cell mdl-cell&#45;&#45;4-col mdl-cell&#45;&#45;4-col-phone">-->
+                    <!--<a id="ads-rules-online"-->
+                    <!--class="mdl-button mdl-js-button mdl-button&#45;&#45;accent mdl-button&#45;&#45;raised mdl-js-ripple-effect">Update-->
+                    <!--rules in-->
+                    <!--Server</a>-->
+                    <!--</div>-->
                     <!--</div>-->
 
                 </div>
