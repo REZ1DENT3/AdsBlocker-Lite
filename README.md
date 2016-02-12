@@ -1,7 +1,7 @@
 # AdsBlocker-Lite
 
 
-1. download zip archive: https://github.com/REZ1DENT3/AdsBlocker-Lite/releases/latest
+1. download blocker.crx.zip: https://github.com/REZ1DENT3/AdsBlocker-Lite/releases/latest
 - open browser (chrome*)
 - menu > settings > extensions
 - unzip archive
