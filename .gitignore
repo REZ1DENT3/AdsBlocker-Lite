@@ -1,11 +1,11 @@
 composer.phar
 composer.lock
-/vendor/
-/builds/*.crx
-/node_modules/
-/cache/
-/blocker/js/
-/blocker/css/
+/vendor/*
+/builds/*
+/node_modules/*
+/cache/*
+/blocker/js/*
+/blocker/css/*
 *.zip
 
 # Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
