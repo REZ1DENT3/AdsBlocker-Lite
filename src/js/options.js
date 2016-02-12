@@ -161,13 +161,20 @@ document.addEventListener("DOMContentLoaded", function () {
             append(items.repositories[i].url, items.repositories[i].apiKey);
         }
         storageParameters = items;
+        if (!storageParameters.rulesData.length) {
+            storageParameters.rulesData = {};
+        }
     });
 });
 
 function saveConfig(msg) {
+    storageParameters.repositories.forEach(function (obj) {
+        obj.data.forEach(addRuleInString);
+    });
     Object.keys(storageParameters.rulesData).map(function (hName) {
         storageParameters.rulesData[hName] = storageParameters.rulesData[hName].unique();
     });
+    console.log(storageParameters);
     chrome.storage.local.set(storageParameters, function () {
         if (typeof msg == "undefined") {
             msg = "Save!";

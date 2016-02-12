@@ -23,6 +23,10 @@ Object.prototype.serialize = function () {
     }).join('&');
 };
 
+Object.prototype.length = function () {
+    return Object.keys(this).length;
+};
+
 Object.prototype.findKey = function (key) {
     keys = [];
     keys = Object.keys(this).filter(function (ind) {
