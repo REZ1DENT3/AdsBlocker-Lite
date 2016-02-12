@@ -1,7 +1,4 @@
-chrome.storage.local.get({
-    rulesData: [],
-    whitelisted: []
-}, function (items) {
+chrome.storage.local.get(storageParameters, function (items) {
 
     rules = [];
     rulesExpr = [];
@@ -36,16 +33,9 @@ chrome.storage.local.get({
 
     isNotWhitelist = items.whitelisted.indexOf(hostname) < 0;
 
+    blocker(document);
     document.addEventListener('DOMSubtreeModified', function (mutationEvent) {
         blocker(mutationEvent.target);
     }, false);
-
-    //t1 = 0;
-    //blocker(document);
-    //document.addEventListener('DOMContentLoaded', function () {
-    //    t1 = 0;
-    //    blocker();
-    //    document.addEventListener('DOMSubtreeModified', blocker, false);
-    //});
 
 });

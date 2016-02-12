@@ -17,6 +17,7 @@
   "options": {
     "type": "js",
     "data": [
+      "js-extended.js",
       "node_modules/material-design-lite/material.js",
       "AdsBlocker.js",
       "options.js"

@@ -16,6 +16,13 @@ Array.prototype.remove = function (item) {
     this.splice(this.indexOf(item), 1);
 };
 
+Object.prototype.serialize = function () {
+    var data = this;
+    return Object.keys(data).map(function(key) {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+    }).join('&');
+};
+
 Object.prototype.findKey = function (key) {
     keys = [];
     keys = Object.keys(this).filter(function (ind) {
@@ -68,7 +75,7 @@ var jsExtended = new (function () {
             return keys.length;
         });
     };
-    this.expr[":removeAll"] = function(d, sel) {
+    this.expr[":removeAll"] = function (d, sel) {
         return d.querySelectorAll(sel);
     };
 })();
@@ -89,4 +96,57 @@ function querySelectorAll(d, selector) {
         }
     }
     return d.querySelectorAll(selector);
+}
+
+function ajax(options) {
+
+    var http = new XMLHttpRequest();
+
+    if (typeof options.success == "undefined") {
+        options.success = function (response) {
+        }
+    }
+
+    if (typeof options.data == "undefined") {
+        options.data = {};
+    }
+
+    if (typeof options.method == "undefined") {
+        options.method = "GET";
+    }
+
+    if (typeof options.contentType == "undefined") {
+        options.contentType = 'application/x-www-form-urlencoded';
+    }
+
+    if (typeof options.stateChange == "undefined") {
+        options.stateChange = function (response) {
+        }
+    }
+
+    if (typeof options.progress == "undefined") {
+        options.progress = function (response) {
+        }
+    }
+
+    if (typeof options.fail == "undefined") {
+        options.fail = function (response) {
+        }
+    }
+
+    if (typeof options.async == "undefined") {
+        options.async = true
+    }
+
+    http.onreadystatechange = options.stateChange;
+    http.onload = options.success;
+    http.onerror = options.fail;
+    http.onprogress = options.progress;
+
+    url = options.url + "?" + options.data.serialize();
+
+    http.open(options.method, url, options.async);
+    http.setRequestHeader('Content-Type', options.contentType);
+    http.send();
+
 }

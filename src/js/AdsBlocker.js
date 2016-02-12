@@ -10,6 +10,20 @@ var rulesExpr = new Array();
 
 var isNotWhitelist = true;
 
+var storageParameters = {
+    rules: [],
+    rulesData: [],
+    whitelisted: [],
+    repositories: []
+};
+
+var repository = function (url, apiKey) {
+    this.url = url;
+    this.apiKey = apiKey;
+    this.data = [];
+    this.updated = 0;
+};
+
 const ConstAllSite = '___AllSite___';
 
 function adsBlock(e) {
@@ -49,7 +63,7 @@ function blocker(d) {
     if (blockerRulesCount) {
         chrome.runtime.sendMessage({
             name: "setBadgeText",
-            text: '' + blockerRulesCount
+            text: Number(blockerRulesCount).toString()
         });
     }
 

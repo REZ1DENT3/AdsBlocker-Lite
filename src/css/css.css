@@ -49,3 +49,11 @@
 .mdl-textfield {
     width: 100% !important;
 }
+
+#repositories-panel .mdl-textfield[id^="repo-id"] {
+    width: 70% !important;
+}
+
+#repositories-panel .mdl-textfield[id^="apikey-id"] {
+    width: 25% !important;
+}
