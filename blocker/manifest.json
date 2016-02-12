@@ -1,6 +1,6 @@
 {
     "name": "AdsBlocker Lite",
-    "version": "0.397",
+    "version": "0.398",
     "description": "AdsBlocker",
     "manifest_version": 2,
     "icons": {
@@ -47,6 +47,6 @@
             "19": "images/icon-19.png",
             "38": "images/icon-38.png"
         },
-		"default_popup": "popup.html"
+        "default_popup": "popup.html"
     }
 }

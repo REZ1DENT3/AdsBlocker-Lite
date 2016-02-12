@@ -248,7 +248,6 @@ document.querySelector('#update').onclick = function (event) {
             success: function (http) {
                 storageParameters.repositories[i].updated = now();
                 storageParameters.repositories[i].data = http.target.response.split('\n');// JSON.parse();
-                storageParameters.repositories[i].data.forEach(addRuleInString);
                 saveConfig("Success, repo: " + storageParameters.repositories[i].url);
             },
             fail: function (http) {
@@ -288,6 +287,7 @@ document.querySelector('#repositories-panel form').onsubmit = function (event) {
 };
 
 document.querySelector('#myrules-panel form').onsubmit = function (event) {
+    storageParameters.rulesData = {};
     storageParameters.rules = document.querySelector('#ads-rules').value.split('\n');
     storageParameters.rules.forEach(addRuleInString);
     saveConfig();
