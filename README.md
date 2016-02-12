@@ -9,6 +9,6 @@
 - confirm addition. (button: add extension)
 - click "options"
 - click on the tab "repositories"
-- insert the "repo url" date: https://ads.babichev.net/blocker
+- insert the "repo url" data: https://ads.babichev.net/blocker
 - click on the button "save"
 - click on the button "update"
