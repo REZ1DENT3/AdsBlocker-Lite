@@ -23,13 +23,6 @@
       "options.js"
     ]
   },
-  "html5": {
-    "type": "js",
-    "data": [
-      "html5shiv.min.js",
-      "respond.min.js"
-    ]
-  },
   "blocker": {
     "type": "js",
     "data": [

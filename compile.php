@@ -75,15 +75,22 @@ try {
 
                     if (file_exists('cache/' . md5($file))) {
                         $caches[$type][$file] = file_get_contents('cache/' . md5($file));
+                        if (trim($caches[$type][$file]) == '') {
+                            $caches[$type][$file] = '';
+                        }
                     }
-                    else if (file_exists($path)) {
-                        $minifier->add('src/' . mb_strtolower($type) . '/' . $file);
-                        $caches[$type][$file] = $minifier->minify();
-                    }
-                    else {
-                        $minifier->add(file_get_contents($file));
-                        $caches[$type][$file] = $minifier->minify();
-                        file_put_contents('cache/' . md5($file), $caches[$type][$file]);
+
+                    if (empty($caches[$type][$file])) {
+
+                        if (file_exists($path)) {
+                            $minifier->add('src/' . mb_strtolower($type) . '/' . $file);
+                            $caches[$type][$file] = $minifier->minify();
+                        }
+                        else {
+                            $minifier->add(file_get_contents($file));
+                            $caches[$type][$file] = $minifier->minify();
+                            file_put_contents('cache/' . md5($file), $caches[$type][$file]);
+                        }
                     }
 
                 }
