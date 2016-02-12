@@ -168,6 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function saveConfig(msg) {
+    storageParameters.rulesData = {};
+    storageParameters.rules.forEach(addRuleInString);
     storageParameters.repositories.forEach(function (obj) {
         obj.data.forEach(addRuleInString);
     });
@@ -287,9 +289,7 @@ document.querySelector('#repositories-panel form').onsubmit = function (event) {
 };
 
 document.querySelector('#myrules-panel form').onsubmit = function (event) {
-    storageParameters.rulesData = {};
     storageParameters.rules = document.querySelector('#ads-rules').value.split('\n');
-    storageParameters.rules.forEach(addRuleInString);
     saveConfig();
     return false;
 };
